@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <title>Get customer</title>
+    <script src="{{ STATIC_URL }}js/sipml.js" ></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js" ></script>
+    <script src="{{ STATIC_URL }}jquery/jquery-1.9.1.js" ></script>
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <script src="{{ STATIC_URL }}js/sipmlForm.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">Customer search</a>
+            <div class="nav-collapse collapse">
+                <form class="navbar-form pull-right" action="" method="POST">{% csrf_token %}
+                    <input class="span2" type="text" name="pub_identity">
+                    <input class="btn" type="button" value="Search" onclick="sendData('')">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<form action=""> {% csrf_token %}
+Private identity <input type="text" name="prid" id="prid"><br/>
+Public Identity <input type="text" name="pubid" id="pubid"><br/>
+Password <input type="password" name="pass" id="pass"><br/>
+Realm <input type="text" name="realm" id="realm"><br/>
+<input type="button" onclick="register();" value="Register">
+</form>
+<div id="result">
+    {% if customer %}
+    Name = {{ customer.name }}<br/>
+    Address = {{ customer.address }}<br/>
+    Public_identity{{ customer.public_identity }}<br/>
+    Description = {{ customer.description }}<br/>
+    {% endif %}
+</div>
+<h1>Some text</h1>
+<audio id="ringtone" src="{{ STATIC_URL }}js/mp3/android.mp3"></audio>
+<button id="stopCall" value="Stop RingTone" onclick="stopRingTone()">stop ringtone</button>
+</body>
+</html>
